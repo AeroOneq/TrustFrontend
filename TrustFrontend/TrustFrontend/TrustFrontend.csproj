@@ -1,0 +1,139 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="addIcon.png" />
+    <None Remove="agreeWC.png" />
+    <None Remove="backIcon.png" />
+    <None Remove="contractIcon.png" />
+    <None Remove="contractsPageNextIcon.png" />
+    <None Remove="disagreeWC.png" />
+    <None Remove="forwardIcon.png" />
+    <None Remove="handshakeIcon.png" />
+    <None Remove="myContractsIcon.png" />
+    <None Remove="myProfileIcon.png" />
+    <None Remove="Resources\acceptedContractsIcon.png" />
+    <None Remove="Resources\addIcon.png" />
+    <None Remove="Resources\applicationIcon.png" />
+    <None Remove="Resources\approveIcon.png" />
+    <None Remove="Resources\chatIcon.png" />
+    <None Remove="Resources\contractIcon.png" />
+    <None Remove="Resources\contractTextIcon.png" />
+    <None Remove="Resources\deleteIcon.png" />
+    <None Remove="Resources\disapproveIcon.png" />
+    <None Remove="Resources\editProfileIcon.png" />
+    <None Remove="Resources\editQueriesIcon.png" />
+    <None Remove="Resources\scrollDownIcon.png" />
+    <None Remove="Resources\sendMessageIcon.png" />
+    <None Remove="Resources\sharedContractsIcon.png" />
+    <None Remove="Resources\takeFaceIDIcon.png" />
+    <None Remove="Resources\userIcon.png" />
+    <None Remove="russian_names.csv" />
+    <None Remove="russian_surnames.csv" />
+    <None Remove="sharedContractsIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\acceptedContractsIcon.png" />
+    <EmbeddedResource Include="Resources\addIcon.png" />
+    <EmbeddedResource Include="Resources\applicationIcon.png" />
+    <EmbeddedResource Include="Resources\approveIcon.png" />
+    <EmbeddedResource Include="Resources\chatIcon.png" />
+    <EmbeddedResource Include="Resources\contractIcon.png" />
+    <EmbeddedResource Include="Resources\contractTextIcon.png" />
+    <EmbeddedResource Include="Resources\deleteIcon.png" />
+    <EmbeddedResource Include="Resources\disapproveIcon.png" />
+    <EmbeddedResource Include="Resources\editProfileIcon.png" />
+    <EmbeddedResource Include="Resources\editQueriesIcon.png" />
+    <EmbeddedResource Include="Resources\scrollDownIcon.png" />
+    <EmbeddedResource Include="Resources\sendMessageIcon.png" />
+    <EmbeddedResource Include="Resources\sharedContractsIcon.png" />
+    <EmbeddedResource Include="Resources\takeFaceIDIcon.png" />
+    <EmbeddedResource Include="Resources\userIcon.png" />
+    <EmbeddedResource Include="russian_names.csv" />
+    <EmbeddedResource Include="russian_surnames.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.9.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.CosmosDB" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Memory" Version="4.5.2" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\CreateNewContractPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ApprovedContractsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\EditProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ConfirmEmailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\CreateNewQueryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\EditQueryViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\EditQueriesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ContractViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ContractViewPageDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ContractViewPageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ContractChatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\MainPageDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\MainPageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\UserProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SharedContractsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\RegistrationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SeverLib\ServerLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\AuthorizationPage.xaml.cs">
+      <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

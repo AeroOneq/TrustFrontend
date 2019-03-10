@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrustFrontend.CreateNewContractPage"
+             xmlns:local ="clr-namespace:TrustFrontend"
+             BackgroundColor="#F0F0F0"
+             Title="Создать контракт">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Create"
+                     Clicked="CreateNewContract"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style x:Key="userEditorHeadLbl" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10, 4, 10, 0"/>
+        </Style>
+        <Style x:Key="lineLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Margin" Value="10, 3, 40, 0"/>
+        </Style>
+        <Style x:Key="createNewContractEditorStyle" TargetType="local:BorderlessEntry">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="PlaceholderColor" Value="DarkGray"/>
+            <Setter Property="Margin" Value="10, 5, 40, 0"/>
+            <Setter Property="PlaceholderColor" Value="Gray"/>
+        </Style>
+        <Style x:Key="deleteUserDataBtnStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="35"/>
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="BackgroundColor" Value="OrangeRed"/>
+            <Setter Property="CornerRadius" Value="35"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+            <Setter Property="BorderColor" Value="Orange"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Image" Value="Resoures/deleteIcon.png"/>
+            <Setter Property="Margin" Value="0, 0, 5, 0"/>
+        </Style>
+        <Style x:Key="groupHeaderLblStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style x:Key="contractTextEditorStyle" TargetType="Editor">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style x:Key="propertyNameLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="15, 5, 0, 0"/>
+        </Style>
+        <Style x:Key="addNewUserBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="150"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Margin" Value="0, 10, 0, 10"/>
+        </Style>
+        <Style x:Key="usersDataHeadLbl" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="BackgroundColor" Value="#E9E9E9"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+            <ListView VerticalOptions="Start"
+                      HorizontalOptions="FillAndExpand"
+                      BackgroundColor="{StaticResource mainThemeBackgroundColor}"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      Margin="0, 5, 0, 0"
+                      ItemsSource="{Binding ContractText}">
+                <ListView.Header>
+                    <ListView x:Name="usersDataListView"
+                              VerticalOptions="Start"
+                              HorizontalOptions="FillAndExpand"
+                              SeparatorVisibility="None"
+                              HasUnevenRows="True"
+                              HeightRequest="190"
+                              ItemsSource="{Binding UsersData}"
+                              SelectionMode="None"
+                              Margin="10, 0, 10, 0"
+                              BackgroundColor="#F0F0F0">
+                        <ListView.Header>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         Spacing="1">
+                                <local:BorderlessEntry Style="{StaticResource createNewContractEditorStyle}"
+                                                       Text="{Binding ContractName}"
+                                                       Placeholder="Имя контракта..."/>
+                                <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                                <Label Style="{StaticResource usersDataHeadLbl}"
+                                       Text="Список пользователей: "/>
+                            </StackLayout>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand"
+                                             Margin="0, 0, 0, 0"
+                                             Spacing="0"
+                                             BackgroundColor="#F0F0F0">
+                                        <Label Style="{StaticResource userEditorHeadLbl}"
+                                               Text="{Binding HeadLabelText}"/>
+                                        <StackLayout VerticalOptions="Start"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     Orientation="Horizontal">
+                                            <local:BorderlessEntry Style="{StaticResource createNewContractEditorStyle}"
+                                                                   Text="{Binding UserNameEditorText}"
+                                                                   IsEnabled="{Binding IsEnabled}"/>
+                                            <Button Style="{StaticResource deleteUserDataBtnStyle}"
+                                                    ClassId="{Binding DeleteButtonId}"
+                                                    IsVisible="{Binding IsDeleteButtonVisible}"
+                                                    Clicked="DeleteUser"/>
+                                        </StackLayout>
+                                        <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <Button x:Name="addNewUserBtn"
+                                Style="{StaticResource addNewUserBtnStyle}"
+                                Text="Добавить"
+                                Clicked="AddNewUser"/>
+                        </ListView.Footer>
+                    </ListView>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="StartAndExpand"
+                                         HorizontalOptions="FillAndExpand"
+                                         Orientation="Vertical"
+                                         BackgroundColor="{StaticResource mainThemeBackgroundColor}"
+                                         Spacing="0">
+                                <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand"
+                                             HeightRequest="40"
+                                             Margin="10, 10, 10, 0"
+                                             BackgroundColor="{StaticResource mainThemeColor}">
+                                    <Label Style="{StaticResource groupHeaderLblStyle}"
+                                           Text="{Binding UserName}"/>
+                                </StackLayout>
+                                <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand"
+                                             Margin="10, 0, 10, 0"
+                                             Spacing="0"
+                                             BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+                                    <Label Style="{StaticResource propertyNameLabelStyle}"
+                                           Text="Права"/>
+                                    <Editor Style="{StaticResource contractTextEditorStyle}"
+                                            Text="{Binding Rights}"/>
+                                    <Label Style="{StaticResource propertyNameLabelStyle}"
+                                           Text="Обязанности"/>
+                                    <Editor Style="{StaticResource contractTextEditorStyle}"
+                                            Text="{Binding Obligations}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

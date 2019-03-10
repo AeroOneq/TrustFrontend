@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local ="clr-namespace:TrustFrontend"
+             x:Class="TrustFrontend.CreateNewQueryPage"
+             Title="Создать предложение">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Создать"
+                     Clicked="CreateNewQuery"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style x:Key="lineLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Margin" Value="10, 0, 10, 0"/>
+        </Style>
+        <Style x:Key="propertyHeadLbl" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="DarkGray"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style x:Key="registrationEntryStyle" TargetType="local:BorderlessEntry">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="PlaceholderColor" Value="DarkGray"/>
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style x:Key="groupHeaderLblStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style x:Key="contractTextEditorStyle" TargetType="Editor">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style x:Key="propertyNameLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="15, 5, 0, 0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource mainThemeColor}">
+            <ListView x:Name="newQueryDataListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      BackgroundColor="#F0F0F0"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      IsPullToRefreshEnabled="False"
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding ContractText}">
+                <ListView.Header>
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 Spacing="2">
+                        <Label Style="{StaticResource propertyHeadLbl}"
+                               Text="Имя предложения"/>
+                        <local:BorderlessEntry Style="{StaticResource registrationEntryStyle}"
+                                               Text="{Binding QueryName}"/>
+                        <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         Orientation="Vertical"
+                                         BackgroundColor="#F0F0F0"
+                                         Spacing="0">
+                                <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand"
+                                             HeightRequest="40"
+                                             Margin="10, 10, 10, 0"
+                                             BackgroundColor="{StaticResource mainThemeColor}">
+                                    <Label Style="{StaticResource groupHeaderLblStyle}"
+                                           Text="{Binding UserName}"/>
+                                </StackLayout>
+                                <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                             Margin="10, 0, 10, 0"
+                                             Spacing="0"
+                                         BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+                                    <Label Style="{StaticResource propertyNameLabelStyle}"
+                                           Text="Права"/>
+                                    <Editor Style="{StaticResource contractTextEditorStyle}"
+                                            Text="{Binding Rights}"/>
+                                    <Label Style="{StaticResource propertyNameLabelStyle}"
+                                           Text="Обязанности"/>
+                                    <Editor Style="{StaticResource contractTextEditorStyle}"
+                                            Text="{Binding Obligations}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

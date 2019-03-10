@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrustFrontend.MainPageMaster"
+             Title="Master">
+    <ContentPage.Resources>
+        <Style x:Key="menuLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 0, 0, 2"/>
+        </Style>
+        <Style x:Key="menuImageStyle" TargetType="Image">
+            <Setter Property="WidthRequest" Value="27"/>
+            <Setter Property="HeightRequest" Value="27"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+        <Style x:Key="userPhotoFrameStyle"  TargetType="Frame">
+            <Setter Property="HeightRequest" Value="70"/>
+            <Setter Property="WidthRequest" Value="70"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="CornerRadius" Value="70"/>
+            <Setter Property="OutlineColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+        </Style>
+        <Style x:Key="appNameLabelStyle" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Margin" Value="20, 0, 0, 0"/>
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <ListView x:Name="menuItemsListView"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="true"
+                  Margin="0, 0, 0, 0"
+                  SelectionMode="None"
+                  BackgroundColor="{StaticResource mainThemeBackgroundColor}"
+                  ItemsSource="{Binding MenuItems}">
+            <ListView.Header>
+                <StackLayout VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand" 
+                             Spacing="0">
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 HeightRequest="100"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="{StaticResource mainThemeColor}">
+                        <Frame Style="{StaticResource userPhotoFrameStyle}"/>
+                        <Label Style="{StaticResource appNameLabelStyle}"
+                               Text="Trust.Options"/>
+                    </StackLayout>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout VerticalOptions="Start"
+                                     HorizontalOptions="FillAndExpand"
+                                     Spacing="0"
+                                     HeightRequest="40">
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="35"
+                                         Orientation="Horizontal"
+                                         Spacing="0">
+                                <Image Style="{StaticResource menuImageStyle}"
+                                       Source="{Binding MenuItemIconSource}"/>
+                                <Label Style="{StaticResource menuLabelStyle}"
+                                       Text="{Binding MenuItemText}"/>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="End"
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="1"
+                                         BackgroundColor="{StaticResource mainThemeColor}"
+                                         Margin="45, 0, 0, 0"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

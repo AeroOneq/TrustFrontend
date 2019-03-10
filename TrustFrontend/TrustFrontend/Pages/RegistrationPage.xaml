@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrustFrontend.RegistrationPage"
+             xmlns:local ="clr-namespace:TrustFrontend"
+             Title="Регистрация">
+    <ContentPage.Resources>
+        <Style x:Key="faceIDFrameStyle" TargetType="Frame">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="125"/>
+            <Setter Property="HeightRequest" Value="125"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="OutlineColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="CornerRadius" Value="125"/>
+            <Setter Property="Margin" Value="15, 0, 15, 0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style x:Key="registrationEntryStyle" TargetType="local:BorderlessEntry">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="PlaceholderColor" Value="DarkGray"/>
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style x:Key="lineLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Margin" Value="10, 0, 10, 0"/>
+        </Style>
+        <Style x:Key="propertyHeadLbl" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="TextColor" Value="DarkGray"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style x:Key="continueBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Margin" Value="30, 10, 30, 20"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style x:Key="activityIndicator" TargetType="ActivityIndicator">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Color" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="IsRunning" Value="True"/>
+            <Setter Property="IsVisible" Value="True"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="Margin" Value="10, 0, 0, 5"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+                <ActivityIndicator x:Name="activityIndicator"
+                                   Style="{StaticResource activityIndicator}"/>
+                <StackLayout VerticalOptions="Start"
+                         HeightRequest="160"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="#F0F0F0"
+                         Orientation="Horizontal"
+                         Spacing="0">
+                    <StackLayout VerticalOptions="Center"
+                             HorizontalOptions="Start"
+                             WidthRequest="150">
+                        <Frame x:Name="faceIDFrame"
+                               Style="{StaticResource faceIDFrameStyle}"/>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             Orientation="Vertical"
+                             Spacing="0">
+                        <StackLayout VerticalOptions="CenterAndExpand"
+                                 HorizontalOptions="FillAndExpand"
+                                 Spacing="0">
+                            <local:BorderlessEntry x:Name="nameEntry"
+                                                   Style="{StaticResource registrationEntryStyle}"
+                                                   Placeholder="Введите имя"
+                                                   Text="Evgeniy"
+                                                   Margin="10, 0, 10, 0"/>
+                            <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                            <local:BorderlessEntry x:Name="surnameEntry"
+                                                   Style="{StaticResource registrationEntryStyle}"
+                                                   Placeholder="Введите фамилию"
+                                                   Text="Stepanov"
+                                                   Margin="10, 10, 10, 0"/>
+                            <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                            <local:BorderlessEntry x:Name="fNameEntry"
+                                                   Text="Vadimovich"
+                                                   Style="{StaticResource registrationEntryStyle}"
+                                                   Placeholder="Введите отчество"
+                                                   Margin="10, 10, 10, 0"/>
+                            <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         Spacing="0">
+                    <Label Style="{StaticResource propertyHeadLbl}"
+                           Text="Логин"/>
+                    <local:BorderlessEntry x:Name="loginEntry"
+                                           Text="Aero123"
+                                           Style="{StaticResource registrationEntryStyle}"/>
+                    <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+
+                    <Label Style="{StaticResource propertyHeadLbl}"
+                           Text="Пароль"/>
+                    <local:BorderlessEntry x:Name="passwordEntry"
+                                           Text="qwerty123321"
+                                           Style="{StaticResource registrationEntryStyle}"/>
+                    <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+
+                    <Label Style="{StaticResource propertyHeadLbl}"
+                           Text="E-mail"/>
+                    <local:BorderlessEntry x:Name="emailEntry"
+                                           Text="aerooneQ@yandex.ru"
+                                           Style="{StaticResource registrationEntryStyle}"/>
+                    <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+
+                    <Label Style="{StaticResource propertyHeadLbl}"
+                           Text="Кодовое слово"/>
+                    <local:BorderlessEntry x:Name="codewordEntry"
+                                           Text="dogcatjungle"
+                                           Style="{StaticResource registrationEntryStyle}"/>
+                    <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+                </StackLayout>
+                <Button Style="{StaticResource continueBtnStyle}"
+                        Text="Принять и продолжить"
+                        Clicked="SendCodeAndGoToNextStage"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="launcher_background">#F8F8FF</color>
+    <color name="colorPrimary">#F8F8FF</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#F8F8FF</color>
+    <color name="colorDefault">#F8F8FF</color>
+    <color name="authorizationEntryBackground">#4B0082</color>
+    <color name="authorizationEntryBorder">#ffffff</color>
+    <color name ="registrationEntryBackground">#4B0082</color>
+    <color name ="registrationEntryBorder">#4B0082</color>
+</resources>

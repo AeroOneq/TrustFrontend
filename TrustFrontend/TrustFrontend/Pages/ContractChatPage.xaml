@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local ="clr-namespace:TrustFrontend"
+             x:Class="TrustFrontend.ContractChatPage"
+             NavigationPage.HasBackButton="True"
+             NavigationPage.HasNavigationBar="True"
+             Title="Chat">
+    <ContentPage.Content>
+        <!--Messages-->
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="White"
+                         Spacing="0">
+                <ScrollView x:Name="chatScrollView"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            Scrolled="OnChatScrollViewScroll"
+                            BackgroundColor="LightCyan">
+                    <StackLayout x:Name="messagesLayout"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand"
+                                 Margin="0, 0, 0, 0"
+                                 BackgroundColor="LightCyan">
+                    </StackLayout>
+                </ScrollView>
+                <!--Chat editor-->
+                <StackLayout x:Name="chatEntryBackgroundLayout"
+                             VerticalOptions="End"
+                             HorizontalOptions="FillAndExpand"
+                             HeightRequest="65"
+                             SizeChanged="ChatBackgroundLayoutSizeChanged"
+                             BackgroundColor="#DCDCDC">
+                    <StackLayout x:Name="chatEntryLayout"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand"
+                                 Margin="10, 10, 10, 10"
+                                 Orientation="Horizontal">
+                        <Frame VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               BackgroundColor="White"
+                               CornerRadius="15"
+                               Padding="0"
+                               HasShadow="False"
+                               Margin="0, 0, 5, 5">
+                            <Editor x:Name="messageEditor"
+                                    Margin="10, 0, 10, 0"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White"
+                                    TextChanged="MessageEditorTextChanged"
+                                    IsSpellCheckEnabled="True"
+                                    Keyboard="Chat"
+                                    Placeholder="Enter the message..."
+                                    PlaceholderColor="#DCDCDC"/>
+                        </Frame>
+                        <Button x:Name="sendMessageBtn"
+                                VerticalOptions="Center"
+                                Clicked="SendMessageBtnClick"
+                                HorizontalOptions="End"
+                                BackgroundColor="#DCDCDC"
+                                Margin="0, 0, 5, 0"
+                                WidthRequest="30"
+                                HeightRequest="30"
+                                Image="Resources/sendMessageIcon.png"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <Button x:Name="getDownBtn"
+                    Clicked="GetDownButtonClick"
+                    IsVisible="False"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Margin="0, 0, 10, 75"
+                    WidthRequest="35"
+                    HeightRequest="35"
+                    BorderRadius="50"
+                    Image="Resources/scrollDownIcon.png"
+                    BackgroundColor="Indigo"/>
+            <Button x:Name="newMessagesNotificationBtn"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    Margin="0, 0, 10, 98"
+                    IsVisible="False"
+                    IsEnabled="False"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    BackgroundColor="DarkOrange"
+                    WidthRequest="10"
+                    HeightRequest="10"
+                    BorderRadius="10"/>
+            <ActivityIndicator x:Name="activityIndicator"
+                               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                               AbsoluteLayout.LayoutFlags="All"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               IsVisible="False"
+                               IsEnabled="False"
+                               WidthRequest="50"
+                               HeightRequest="50"
+                               Color="Indigo"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

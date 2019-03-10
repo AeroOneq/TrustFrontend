@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrustFrontend.UserProfilePage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Resources>
+        <Style x:Key="userPhotoFrameStyle" TargetType="Frame">
+            <Setter Property="HeightRequest" Value="120"/>
+            <Setter Property="WidthRequest" Value="120"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="20, 0, 20, 0"/>
+            <Setter Property="CornerRadius" Value="70"/>
+            <Setter Property="OutlineColor" Value="{StaticResource mainThemeColor}"/>
+        </Style>
+        <Style x:Key="nameLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Orientation" Value="Vertical"/>
+            <Setter Property="Spacing" Value="0"/>
+        </Style>
+        <Style x:Key="propertyNameLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="propertyValueLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="Resources/editProfileIcon.png"
+                     Clicked="GoToEditProfilePage"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+            <ListView x:Name="userProfileListView"
+                      VerticalOptions="FillAndExpand"
+                      BackgroundColor="#F0F0F0"
+                      HorizontalOptions="FillAndExpand"
+                      SelectionMode="None"
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding UserData}"
+                      IsPullToRefreshEnabled="True">
+                <ListView.Header>
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 HeightRequest="200"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+                        <Frame x:Name="userPhotoFrame"
+                               Style="{StaticResource userPhotoFrameStyle}"/>
+                        <StackLayout Style="{StaticResource nameLayoutStyle}">
+                            <StackLayout VerticalOptions="CenterAndExpand"
+                                         Spacing="0">
+                                <Label Style="{StaticResource propertyNameLabelStyle}"
+                                       Text="Имя"/>
+                                <Label Style="{StaticResource propertyValueLabelStyle}"
+                                       Text="{Binding HeaderName}"/>
+                                <Label Style="{StaticResource propertyNameLabelStyle}"
+                                       Margin="10, 10, 0, 0"
+                                       Text="Фамилия"/>
+                                <Label Style="{StaticResource propertyValueLabelStyle}"
+                                       Text="{Binding HeaderSurname}"/>
+                                <Label Style="{StaticResource propertyNameLabelStyle}"
+                                       Margin="10, 10, 0, 0"
+                                       Text="Отчество"/>
+                                <Label Style="{StaticResource propertyValueLabelStyle}"
+                                       Text="{Binding HeaderFamilyName}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         Spacing="0"
+                                         BackgroundColor="#F0F0F0"
+                                         Margin="0, 8, 0, 0">
+                                <Label Style="{StaticResource propertyNameLabelStyle}"
+                                       Text="{Binding PropertyName}"
+                                       Margin="20, 0, 0, 0"/>
+                                <Label Style="{StaticResource propertyValueLabelStyle}"
+                                       Text="{Binding PropertyValue}"
+                                       Margin="20, 0, 0, 0"/>
+                                <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand"
+                                             HeightRequest="2"
+                                             Margin="20, 4, 0, 0"
+                                             BackgroundColor="{StaticResource mainThemeBackgroundColor}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

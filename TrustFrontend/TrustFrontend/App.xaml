@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrustFrontend.App">
+    <Application.Resources>
+        <Color x:Key="mainThemeBackgroundColor">White</Color>
+        <Color x:Key="mainThemeColor">#00008B</Color>
+        <Color x:Key="mainTextColor">Black</Color>
+        <Color x:Key="mainErrorTextColor">#FF8C00</Color>
+        <Color x:Key="mainSmallButtonTextColor">Indigo</Color>
+        <Color x:Key="mainSmallButtonBackgroundPressed">White</Color>
+        <Color x:Key="mainSmallButtonBackgroundNPressed">Indigo</Color>
+        <Color x:Key="mainSmallButtonBorderColor">White</Color>
+        <Color x:Key="regTopTheme">Indigo</Color>
+        <Color x:Key="regScrollTheme">#5C019D</Color>
+        <Color x:Key="regTextColor">White</Color>
+        <Color x:Key="regErrorTextColor">#FF8C00</Color>
+    </Application.Resources>
+</Application>

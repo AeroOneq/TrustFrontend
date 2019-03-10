@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrustFrontend.EditQueryViewPage"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="Resources/approveIcon.png"/>
+        <ToolbarItem Icon="Resources/disapproveIcon.png"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style x:Key="headerLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="FontAttributes" Value="None"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="Margin" Value="5, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="groupHeaderLblStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
+        <Style x:Key="propertyNameLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="propertyValueLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+            <ListView x:Name="editQueryDataListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      SeparatorVisibility="None"
+                      IsGroupingEnabled="False"
+                      HasUnevenRows="True"
+                      Margin="10, 0, 10, 0"
+                      BackgroundColor="{StaticResource mainSmallButtonBorderColor}"
+                      ItemsSource="{Binding ContractText}">
+                <ListView.Header>
+                     <StackLayout VerticalOptions="Start"
+                                  HorizontalOptions="FillAndExpand"
+                                  HeightRequest="40"
+                                  Margin="0, 10, 0, 0"
+                                  Orientation="Horizontal"
+                                  BackgroundColor="{StaticResource mainThemeColor}">
+                        <Label Style="{StaticResource headerLabelStyle}"
+                               Text="НОВЫЙ ТЕКСТ КОНТРАКТА"/>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="#F0F0F0">
+                                <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="30"
+                                         Margin="0, 10, 0, 0"
+                                         BackgroundColor="{StaticResource mainThemeColor}">
+                                    <Label Style="{StaticResource groupHeaderLblStyle}"
+                                           Text="{Binding UserName}"/>
+                                </StackLayout>
+                                <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Label Style="{StaticResource propertyNameLabelStyle}"
+                                           Text="Права"/>
+                                    <Label Style="{StaticResource propertyValueLabelStyle}"
+                                           Text="{Binding Rights}"/>
+                                    <Label Style="{StaticResource propertyNameLabelStyle}"
+                                           Text="Обязанности"/>
+                                    <Label Style="{StaticResource propertyValueLabelStyle}"
+                                           Text="{Binding Obligations}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

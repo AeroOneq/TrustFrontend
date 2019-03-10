@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrustFrontend" 
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             x:Class="TrustFrontend.AuthorizationPage">
+    <ContentPage.Resources>
+        <Style x:Key="topStackLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="Spacing" Value="0"/>
+        </Style>
+        <Style x:Key="appNameLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Start"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Font" Value="Bold"/>
+            <Setter Property="Margin" Value="0, 20, 0, 0"/>
+        </Style>
+        <Style x:Key="logoStyle" TargetType="Image">
+            <Setter Property="Margin" Value="0, 20, 0, 20"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="HeightRequest" Value="60"/>
+        </Style>
+        <Style x:Key="authOptionsActiveBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="0, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="authOptionsPassiveBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="0, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="authContHeaderStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="HorizontalTextAlignment" Value="Left"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="10, 15, 0, 0"/>
+        </Style>
+        <Style x:Key="authActivityIndicator" TargetType="ActivityIndicator">
+            <Setter Property="VerticalOptions" Value="End"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Color" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="IsRunning" Value="True"/>
+            <Setter Property="IsVisible" Value="True"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="Margin" Value="10, 0, 0, 5"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+        <Style x:Key="authBorderlessEntryStyle" TargetType="local:BorderlessEntry">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="HeightRequest" Value="30"/>
+        </Style>
+        <Style x:Key="takeFaceIDBtnStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="35"/>
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0, 10, 10, 0"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+        <Style x:Key="devisionStackLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="10, 0, 10, 0"/>
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+        </Style>
+        <Style x:Key="signInBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="130"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="signUpBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="170"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Margin" Value="5, 0, 10, 0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"
+                 BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+            <ScrollView VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+                <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="White">
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 Style="{StaticResource topStackLayoutStyle}">
+                        <Label x:Name="appNameLabel"
+                               Style="{StaticResource appNameLabelStyle}"
+                               Text="T R U S T"/>
+                        <Image Source="Resources/applicationIcon.png"
+                               Style="{StaticResource logoStyle}"/>
+                        <StackLayout VerticalOptions="EndAndExpand"
+                                     HorizontalOptions="FillAndExpand"
+                                     HeightRequest="40"
+                                     Spacing="0"
+                                     Margin="0, 40, 0, 0"
+                                     Orientation="Horizontal"
+                                     BackgroundColor="{StaticResource mainThemeColor}">
+                            <Button x:Name="switchToLoginPassModeBtn"
+                                    Text="Логин + пароль"
+                                    Clicked="SwitchToLoginPassMode"
+                                    Style="{StaticResource authOptionsActiveBtnStyle}"/>
+                            <Button x:Name="switchToLoginFaceIDModeBtn"
+                                    Text="Логин + Face ID"
+                                    Clicked="SwitchToLoginFaceIDMode"
+                                    Style="{StaticResource authOptionsPassiveBtnStyle}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout x:Name="authLayout"
+                                 Margin="0, 20, 0,0"
+                                 VerticalOptions="StartAndExpand"
+                                 Spacing="0"
+                                 HorizontalOptions="FillAndExpand">
+                        <StackLayout VerticalOptions="Start"
+                                     HorizontalOptions="FillAndExpand"
+                                     Orientation="Horizontal"
+                                     Spacing="0">
+                            <Label x:Name="authContName"
+                                   Style="{StaticResource authContHeaderStyle}"
+                                   Text="Авторизация"/>
+                            <ActivityIndicator x:Name="authActivityIndicator"
+                                           Style="{StaticResource authActivityIndicator}"/>
+                        </StackLayout>
+                        <StackLayout VerticalOptions="Start"
+                                     HorizontalOptions="FillAndExpand"
+                                     Orientation="Horizontal">
+                            <local:BorderlessEntry x:Name="loginEntry"
+                                                   Style="{StaticResource authBorderlessEntryStyle}"
+                                                   Margin="10, 20, 35, 0"
+                                                   Placeholder="Введите логин"/>
+                            <Button x:Name="takeFaceIDBtn"
+                                    Image="Resources/takeFaceIDIcon.png"
+                                    Style="{StaticResource takeFaceIDBtnStyle}"/>
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource devisionStackLayoutStyle}"/>
+                        <local:BorderlessEntry x:Name="passwordEntry"
+                                               Style="{StaticResource authBorderlessEntryStyle}"
+                                               IsPassword="True"
+                                               Margin="10, 20, 0, 0"
+                                               Placeholder="Введите пароль"/>
+                        <StackLayout Style="{StaticResource devisionStackLayoutStyle}"/>
+                        <StackLayout VerticalOptions="Start"
+                                     HorizontalOptions="FillAndExpand"
+                                     Spacing="0"
+                                     Margin="0, 20, 0, 0"
+                                     Orientation="Horizontal">
+                            <Button x:Name="signInBtn"
+                                    Text="Войти"
+                                    Clicked="SignIn"
+                                    Style="{StaticResource signInBtnStyle}"/>
+                            <Button x:Name="signUpBtn"
+                                    Text="Создать аккаунт"
+                                    Clicked="SignUp"
+                                    Style="{StaticResource signUpBtnStyle}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrustFrontend"
+             x:Class="TrustFrontend.ApprovedContractsPage">
+    <ContentPage.Resources>
+        <Style x:Key="contractImageStyle" TargetType="Image">
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="WidthRequest" Value="50"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="5, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="contractNameLblStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="0, 5, 0, 0"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="contractCreationDateStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="End"/>
+            <Setter Property="Margin" Value="0, 5, 5, 0"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+        </Style>
+        <Style x:Key="contractAuthorNameStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="5, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="contractFrameStyle" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+        </Style>
+        <Style x:Key="searchFrameStyle" TargetType="Frame">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="OutlineColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="BorderColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="Margin" Value="10, 0, 40, 0"/>
+        </Style>
+        <Style x:Key="borderlessSearchEntryStyle" TargetType="local:BorderlessEntry">
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="15, 5, 15, 1"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Placeholder" Value="Поиск..."/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+        </Style>
+        <Style x:Key="addContractButtonStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+            <Setter Property="WidthRequest" Value="35"/>
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="CornerRadius" Value="35"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="Margin" Value="0, 0, 5, 0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+            <ListView x:Name="approvedContractsListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      ItemTapped="GoToContractViewPage"
+                      SeparatorVisibility="None"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="UpdateApprovedContractsList"
+                      ItemsSource="{Binding ContractsData}"
+                      BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+                <ListView.Header>
+                    <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 HeightRequest="60"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="{StaticResource mainThemeColor}">
+                        <Frame Style="{StaticResource searchFrameStyle}">
+                            <local:BorderlessEntry x:Name="searchEntry"
+                                                   Style="{StaticResource borderlessSearchEntryStyle}"/>
+                        </Frame>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         Orientation="Vertical">
+                                <StackLayout VerticalOptions="Start"
+                                         HorizontalOptions="FillAndExpand"
+                                         Orientation="Horizontal"
+                                         Margin="0, 5, 0, 5">
+                                    <Image Source="Resources/contractIcon.png"
+                                           Style="{StaticResource contractImageStyle}"/>
+                                    <StackLayout VerticalOptions="FillAndExpand"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Orientation="Vertical">
+                                        <StackLayout VerticalOptions="Start"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     Orientation="Horizontal">
+                                            <Label Text="{Binding ContractName}"
+                                                   Style="{StaticResource contractNameLblStyle}"/>
+                                            <Label Text="{Binding CreationDate}"
+                                                   Style="{StaticResource contractCreationDateStyle}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal"
+                                                 VerticalOptions="Start"
+                                                 HorizontalOptions="FillAndExpand">
+                                            <Frame Style="{StaticResource contractFrameStyle}"/>
+                                            <Label Style="{StaticResource contractAuthorNameStyle}"
+                                                   Text="{Binding AuthorName}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout VerticalOptions="Start"
+                                             HorizontalOptions="FillAndExpand"
+                                             Margin="55, 0, 0, 0"
+                                             HeightRequest="1"
+                                             BackgroundColor="{StaticResource mainThemeColor}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

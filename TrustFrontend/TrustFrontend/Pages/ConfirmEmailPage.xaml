@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrustFrontend"
+             x:Class="TrustFrontend.ConfirmEmailPage"
+             NavigationPage.HasBackButton="True"
+             Title="Подтверждение почты">
+    <ContentPage.Resources>
+        <Style x:Key="headerLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="30, 0, 30, 0"/>
+        </Style>
+        <Style x:Key="entryStyle" TargetType="local:BorderlessEntry">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="30, 20, 30, 0"/>
+            <Setter Property="HeightRequest" Value="45"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
+            <Setter Property="BackgroundColor" Value="Red"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="MaxLength" Value="6"/>
+        </Style>
+        <Style x:Key="continueBtnStyle" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="FontFamily" Value="Arial, Verdana"/>
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="TextColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Margin" Value="30, 10, 30, 20"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style x:Key="lineLayoutStyle" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Margin" Value="30, 0, 30, 0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     Spacing="2">
+            <Label Style="{StaticResource headerLabelStyle}"
+                   Text="Введите код, высланный на указанную почту"/>
+            <local:BorderlessEntry x:Name="emailCodeEntry"
+                Style="{StaticResource entryStyle}"/>
+            <StackLayout Style="{StaticResource lineLayoutStyle}"/>
+            <Button Style="{StaticResource continueBtnStyle}"
+                    Text="Создать аккаунт"
+                    Clicked="CreateNewAcc"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
