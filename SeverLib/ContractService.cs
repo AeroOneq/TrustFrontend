@@ -12,5 +12,8 @@ namespace ServerLib
 
         public static async Task<List<ContractInfo>> GetAllUserContracts(int userID, bool status) =>
             await Task.Run(() => ContractDB.GetUserContracts(userID, status));
+
+        public static async Task UpdateRecord(ContractInfo contract) =>
+            await Task.Run(() => ContractDB.UpdateContractRecord(contract));
     }
 }

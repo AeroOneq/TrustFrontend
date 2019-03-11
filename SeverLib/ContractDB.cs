@@ -20,9 +20,9 @@ namespace ServerLib
                 SqlCommand updateCommand = new SqlCommand()
                 {
                     Connection = connection,
-                    CommandText = @"UPDATE TABLE contracts SET cText = @cText, photos = @photos, authorId = @authorId, 
-                    participants = @participants, unsignedP = @unsignedP, approvedP = @approvedP, 
-                    disapprovedP = @disapprovedP, name = @name, creationDate = @creationDate WHERE id like @id"
+                    CommandText = @"UPDATE contracts SET contractText = @cText, contractPhoto = @photos, authorId = @authorId, 
+                    participantsID = @participants, unsignedP = @unsignedP, approvedP = @approvedP, 
+                    disapprovedP = @disapprovedP, name = @name, creationDate = @creationDate, contractStatus = @status WHERE id like @id"
                 };
 
                 string cText = JsonConvert.SerializeObject(contract.ContractText);
@@ -45,6 +45,7 @@ namespace ServerLib
                 updateCommand.Parameters.AddWithValue("@disapprovedP", disapprovedP);
                 updateCommand.Parameters.AddWithValue("@name", contract.Name);
                 updateCommand.Parameters.AddWithValue("@creationDate", contract.CreationDate);
+                updateCommand.Parameters.AddWithValue("@status", contract.Status);
 
                 updateCommand.ExecuteNonQuery();
             }
@@ -185,17 +186,22 @@ namespace ServerLib
                     {
                         sqlCommand.CommandText = $"SELECT * FROM contracts WHERE id like '{contractsId[i]}' AND CONTRACTSTATUS like '{(status ? 1 : 0)}'";
                         sqlDataReader = sqlCommand.ExecuteReader();
-                        sqlDataReader.Read();
-                        ContractText contractText = JsonConvert.DeserializeObject<ContractText>(
-                            (string)sqlDataReader.GetValue(1));
-                        int[] participantsId = TransferArrays.StringToInt((string)sqlDataReader.GetValue(4));
-                        int[] unsignedP = TransferArrays.StringToInt((string)sqlDataReader.GetValue(5));
-                        int[] approvedP = TransferArrays.StringToInt((string)sqlDataReader.GetValue(6));
-                        int[] disapprovedP = TransferArrays.StringToInt((string)sqlDataReader.GetValue(7));
-                        userContracts.Add(new ContractInfo((int)sqlDataReader.GetValue(0), contractText,
-                           (byte[])sqlDataReader.GetValue(2), (int)sqlDataReader.GetValue(3), participantsId,
-                           unsignedP, approvedP, disapprovedP, (string)sqlDataReader.GetValue(8),
-                           (DateTime)sqlDataReader.GetValue(9), (bool)sqlDataReader.GetValue(10)));
+                        if (sqlDataReader.HasRows)
+                        {
+                            sqlDataReader.Read();
+
+                            ContractText contractText = JsonConvert.DeserializeObject<ContractText>(
+                                (string)sqlDataReader.GetValue(1));
+                            int[] participantsId = TransferArrays.StringToInt((string)sqlDataReader.GetValue(4));
+                            int[] unsignedP = TransferArrays.StringToInt((string)sqlDataReader.GetValue(5));
+                            int[] approvedP = TransferArrays.StringToInt((string)sqlDataReader.GetValue(6));
+                            int[] disapprovedP = TransferArrays.StringToInt((string)sqlDataReader.GetValue(7));
+
+                            userContracts.Add(new ContractInfo((int)sqlDataReader.GetValue(0), contractText,
+                               (byte[])sqlDataReader.GetValue(2), (int)sqlDataReader.GetValue(3), participantsId,
+                               unsignedP, approvedP, disapprovedP, (string)sqlDataReader.GetValue(8),
+                               (DateTime)sqlDataReader.GetValue(9), (bool)sqlDataReader.GetValue(10)));
+                        }
                         sqlDataReader.Close();
                     }
                     return userContracts;
@@ -228,5 +234,6 @@ namespace ServerLib
 
             updateContractRecordCommand.ExecuteNonQuery();
         }
+
     }
 }

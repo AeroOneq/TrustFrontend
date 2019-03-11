@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrustFrontend.ContractViewPageDetail"
              Title="Текст контракта">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="Resources/approveIcon.png"
+                     Clicked="ApproveContract"/>
+        <ToolbarItem Icon="Resources/disapproveIcon.png"
+                     Clicked="DisapproveContract"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style x:Key="groupHeaderLblStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="Arial"/>
