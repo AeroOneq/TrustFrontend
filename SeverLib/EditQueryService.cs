@@ -13,5 +13,8 @@ namespace ServerLib
         public static async Task CreateNewRecordAsync(EditQuery editQuery) =>
             await Task.Run(() => EditQueryDB.CreateNewRecord(editQuery));
 
+        public static async Task UpdateQueryStatus(EditQuery editQuery, ContractInfo contractInfo) =>
+            await Task.Run(() => EditQueryDB.UpdateQueryStatus(editQuery, contractInfo));
+
     }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ServerLib;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,11 +18,17 @@ namespace TrustFrontend
     public partial class MainPageMaster : ContentPage
     {
         public ListView ListView { get; set; }
+        public UserInfo User { get; set; }
 
         public MainPageMaster()
         {
             InitializeComponent();
 
+            userPhotoFrame.Content = new Image()
+            {
+                Aspect = Aspect.Fill,
+                Source = ImageSource.FromStream(() => new MemoryStream(User.FaceID))
+            };
             ListView = menuItemsListView;
             BindingContext = new MainPageMasterViewModel();
         }

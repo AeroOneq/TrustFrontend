@@ -58,7 +58,7 @@ namespace ServerLib
         public static void CreateCosmosDBForChat(ContractInfo contract)
         {
             CosmosDB cosmosDB = new CosmosDB();
-            //cosmosDB.Connect();
+            cosmosDB.Connect();
             cosmosDB.CreateNewCollectionAsync(contract);
         }
         /// <summary>
@@ -93,6 +93,8 @@ namespace ServerLib
                     id = (int)sqlDataReader.GetValue(0);
                     ++id;
                 }
+
+                contract.Id = id;
                 sqlDataReader.Close();
                 //transfer variables into the apropriate format
                 string cText = JsonConvert.SerializeObject(contract.ContractText);
@@ -158,6 +160,8 @@ namespace ServerLib
                 sqlCommand.CommandText = $"UPDATE users SET contracts='{userContracts}'" +
                     $" WHERE id={contract.AuthorId}";
                 sqlCommand.ExecuteNonQuery();
+
+                CreateCosmosDBForChat(contract);
             }
             finally
             {
@@ -217,7 +221,7 @@ namespace ServerLib
             }
         }
 
-        private static void UpdateContractText(EditQuery editQuery, ContractInfo contract,
+        public static void UpdateContractText(EditQuery editQuery, ContractInfo contract,
             SqlConnection connection)
         {
             SqlCommand updateContractRecordCommand = new SqlCommand

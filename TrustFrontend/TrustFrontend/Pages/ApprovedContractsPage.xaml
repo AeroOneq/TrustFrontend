@@ -102,6 +102,7 @@
                                  BackgroundColor="{StaticResource mainThemeColor}">
                         <Frame Style="{StaticResource searchFrameStyle}">
                             <local:BorderlessEntry x:Name="searchEntry"
+                                                   TextChanged="SearchForContracts"
                                                    Style="{StaticResource borderlessSearchEntryStyle}"/>
                         </Frame>
                     </StackLayout>

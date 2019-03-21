@@ -19,6 +19,7 @@ namespace TrustFrontend
         private const int ChatEditorHeightDelta = 10;
         private const int MaximumNumberOfLines = 14;
         #endregion
+
         #region Properties
         private ContractInfo CurrentContract { get; set; }
         private UserInfo CurrentUser { get; set; }
@@ -37,14 +38,15 @@ namespace TrustFrontend
             InitializeComponent();
             TokenSource = new CancellationTokenSource();
             CancellationToken = TokenSource.Token;
-            //SetPropertiesValue(contract, user);
-            //DoInitialUploadAsync(contract, user);
+            SetPropertiesValue(contract, user);
+            DoInitialUploadAsync(contract, user);
         }
 
         #region Main methods
         private async void DoInitialUploadAsync(ContractInfo contract, UserInfo user)
         {
             SwitchOnActivityIndicator();
+            await CosmosDB.Connect();
             List<MessageInfo> messages = await CosmosDB.GetAllMessages(contract);
             UploadChatToUI(messages, user.Id, 0);
             await chatScrollView.ScrollToAsync(messagesLayout, ScrollToPosition.End, false);
@@ -69,37 +71,59 @@ namespace TrustFrontend
         }
         private void SendMessage(ContractInfo contract, UserInfo user)
         {
-            if (messageEditor.Text != null && messageEditor.Text != string.Empty)
+            try
             {
-                MessageInfo message = CreateMessageObject(contract, user);
-                AddMessageToTheCosmosDB(message);
-                DoWeNeedToScrollDown = true;
+                if (messageEditor.Text != null && messageEditor.Text != string.Empty)
+                {
+                    MessageInfo message = CreateMessageObject(contract, user);
+                    AddMessageToTheCosmosDB(message);
+                    DoWeNeedToScrollDown = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Ошибка", ex.Message, "OK");
             }
         }
         private void StartTimer()
         {
-            Device.StartTimer(TimeSpan.FromMilliseconds(250), () =>
+            Device.StartTimer(TimeSpan.FromMilliseconds(250),() =>
             {
-                if (Messages.Count > 0 && Messages.Count != NumberOfMessages)
+                try
                 {
-                    MessageInfo[] messagesArray = new MessageInfo[Messages.Count];
-                    Messages.CopyTo(messagesArray);
-                    UploadChatToUI(messagesArray.ToList(), CurrentUser.Id, NumberOfMessages);
-                    DoAfterChatUpdateActions();
+                    if (Messages.Count > 0 && Messages.Count != NumberOfMessages)
+                    {
+                        MessageInfo[] messagesArray = new MessageInfo[Messages.Count];
+                        Messages.CopyTo(messagesArray);
+                        UploadChatToUI(messagesArray.ToList(), CurrentUser.Id, NumberOfMessages);
+                        DoAfterChatUpdateActions();
+                    }
+                    return IsUpdateProcessOn;
                 }
-                return IsUpdateProcessOn;
+                catch (Exception ex)
+                {
+                    DisplayAlert("Ошибка", ex.Message, "OK");
+                    return false;
+                }
             });
         }
         #endregion
         #region Chat updarte methods
         private async void Update()
         {
-            while (true)
+            try
             {
-                if (CancellationToken.IsCancellationRequested)
-                    break;
-                Messages = await CosmosDB.GetAllMessages(CurrentContract);
-                await Task.Delay(350);
+                while (true)
+                {
+                    if (CancellationToken.IsCancellationRequested)
+                        break;
+                    Messages = await CosmosDB.GetAllMessages(CurrentContract);
+                    await Task.Delay(350);
+                }
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Ошибка", "Обновление невозможно, перезайдите на страницу", "OK");
             }
         }
         private void UploadChatToUI(List<MessageInfo> messages, int userId,
@@ -151,6 +175,7 @@ namespace TrustFrontend
                     chatEntryBackgroundLayout.HeightRequest = MaximumChatEditorHeight;
             }
         }
+
         private void DoAfterChatUpdateActions()
         {
             if (getDownBtn.IsVisible)
@@ -161,25 +186,30 @@ namespace TrustFrontend
                 DoWeNeedToScrollDown = false;
             }
         }
+
         private void SwitchOnActivityIndicator()
         {
             activityIndicator.IsRunning = true;
             activityIndicator.IsVisible = true;
         }
+
         private void SwitchOffActivityIndicator()
         {
             activityIndicator.IsRunning = false;
             activityIndicator.IsVisible = false;
         }
+
         private void SetPropertiesValue(ContractInfo contract, UserInfo user)
         {
             CurrentContract = contract;
             CurrentUser = user;
         }
+
         private void AddMessageToTheCosmosDB(MessageInfo message)
         {
             CosmosDB.InsertMessageIntoTheDB(message);
         }
+
         private MessageInfo CreateMessageObject(ContractInfo contract,
             UserInfo user)
         {
@@ -192,6 +222,7 @@ namespace TrustFrontend
             return new MessageInfo(text, sendTime, id, userId, chatId,
                 userName);
         }
+
         private int CountLines(string text)
         {
             if (text == null)

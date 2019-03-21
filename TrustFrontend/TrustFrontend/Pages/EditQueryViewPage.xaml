@@ -4,7 +4,8 @@
              x:Class="TrustFrontend.EditQueryViewPage"
              NavigationPage.HasNavigationBar="True">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="Resources/approveIcon.png"/>
+        <ToolbarItem Icon="Resources/approveIcon.png"
+                     Clicked="ApproveQuery"/>
         <ToolbarItem Icon="Resources/disapproveIcon.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>

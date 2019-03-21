@@ -17,11 +17,7 @@ namespace TrustFrontend
             InitializeComponent();
             MainPage = new NavigationPage(new AuthorizationPage());
         }
-        private AuthResult GetUser(int currentUserId)
-        {
-            UserInfo user = Login.GetUserById(currentUserId, out string mistakeMsg);
-            return new AuthResult(user, mistakeMsg);
-        }
+
         protected override void OnStart()
         {
             

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace ServerLib
 {
@@ -15,5 +16,9 @@ namespace ServerLib
 
         public static async Task UpdateRecord(ContractInfo contract) =>
             await Task.Run(() => ContractDB.UpdateContractRecord(contract));
+
+        public static async Task UpdateContractText(ContractInfo contract, EditQuery editQuery,
+             SqlConnection connection) =>
+            await Task.Run(() => ContractDB.UpdateContractText(editQuery, contract, connection));
     }
 }

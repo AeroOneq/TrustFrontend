@@ -16,6 +16,7 @@ namespace TrustFrontend
         #region Properties
         public ObservableCollection<ListViewGrouping<string, EditQueryModel>>
             QueriesGroups { get; set; }
+
         public List<EditQuery> EditQueriesList { get; set; } = new List<EditQuery>();
         private ContractInfo CurrentContract { get; set; }
         private UserInfo CurrentUser { get; set; }
@@ -33,7 +34,7 @@ namespace TrustFrontend
         {
             EditQueryModel editQueryModel = e.Item as EditQueryModel;
             EditQuery editQuery = EditQueriesList.Find(eq => eq.QueryId == editQueryModel.ID);
-            await Navigation.PushAsync(new EditQueryViewPage(editQuery));
+            await Navigation.PushAsync(new EditQueryViewPage(editQuery, CurrentContract, CurrentUser));
         }
 
         private async void GoToCreateQueryPage(object sender, EventArgs e)

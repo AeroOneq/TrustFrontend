@@ -19,7 +19,10 @@ namespace TrustFrontend
         {
             InitializeComponent();
             CurrentUser = user;
+
             MasterPage.ListView.ItemTapped += ListViewItemTapped;
+            MasterPage.User = user;
+
             Detail = new SharedContractsPage(user);
         }
 

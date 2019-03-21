@@ -15,14 +15,15 @@ namespace ServerLib
     {
         #region Connection constants
         private static readonly string EndpointUrl = "https://trustcosmosdb.documents.azure.com:443/";
-        private static readonly string PrimaryKey = "WmQj6N819bQVOow27tlwFLeU9pYhWbnYrFSNiKLtNv6zZodwBfSx73BfqzzkNRYsWZwZIMZbC3FtkzqViOTPDA==";
+        private static readonly string PrimaryKey = "D6xn7MJSqWzlXVyuO3DS4N5VwpAuupRhtsye9cdBfHYsSyg1b183O3ojReU2b6yhuQgqHYaUUka2ZLDIJB2b0A==";
         private static readonly string DatabaseName = "TrustMessagesDB";
         #endregion
+
         #region Properties
         private  DocumentClient DocumentClient { get; set; }
         #endregion
 
-        public void Connect() => Task.Run(() => CreateNewClient());
+        public async Task Connect() => await Task.Run(() => CreateNewClient());
         public async Task<List<MessageInfo>> GetAllMessages(ContractInfo contract)
         {
             var messages = await DocumentClient.ReadDocumentFeedAsync(

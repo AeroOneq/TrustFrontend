@@ -37,11 +37,16 @@ namespace TrustFrontend
             try
             {
                 UserInfo newUser = await CreateNewUserObject();
-                await Task.Run(() => Update.UpdateUserRecord(User, newUser));
+
+                await UserService.UpdateRecordAsync(User, newUser);
             }
             catch (ArgumentException ex)
             {
                 await DisplayAlert("Ошибка в данных", ex.Message, "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", ex.Message, "OK");
             }
         }
 
@@ -61,7 +66,7 @@ namespace TrustFrontend
                 newUser.Name = Model.Name;
                 newUser.Surname = Model.Surname;
                 newUser.FName = Model.FName;
-                newUser.FaceID = (NewFaceID == null) ? User.FaceID : NewFaceID;
+                newUser.FaceID = NewFaceID ?? User.FaceID;
 
                 return newUser;
             }

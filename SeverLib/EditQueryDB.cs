@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ServerLib
 {
@@ -118,6 +119,43 @@ namespace ServerLib
                 int biggestId = (int)dataReader.GetValue(10);
                 dataReader.Close();
                 return biggestId + 1;
+            }
+        }
+
+        /// <summary>
+        /// Updates the edit query record by changing the disapprovedP, approvedP and closed
+        /// colls of the record.
+        /// </summary>
+        /// <returns>Error message if the exception occured</returns>
+        public static async Task UpdateQueryStatus(EditQuery editQuery, ContractInfo contract)
+        {
+            SqlConnection connection = Connect.Do(Constants.connectionStr);
+            try
+            {
+                connection.Open();
+                SqlCommand updateQueryStatusCommand = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandText = @"UPDATE editQueries SET approvedP = @approvedP,
+                        disapprovedP = @disapprovedP, closed = @closed WHERE 
+                        queryId like @queryId"
+                };
+                updateQueryStatusCommand.Parameters.AddWithValue("@approvedP",
+                    TransferArrays.IntToString(editQuery.ApprovedP));
+                updateQueryStatusCommand.Parameters.AddWithValue("@disapprovedP",
+                    TransferArrays.IntToString(editQuery.DisapprovedP));
+                updateQueryStatusCommand.Parameters.AddWithValue("@closed", editQuery.Closed);
+                updateQueryStatusCommand.Parameters.AddWithValue("@queryId",
+                    editQuery.QueryId);
+
+                if (editQuery.ApprovedP.Length == contract.ParticipantsId.Length)
+                    await ContractService.UpdateContractText(contract, editQuery, connection);
+
+                updateQueryStatusCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }

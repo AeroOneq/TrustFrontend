@@ -45,7 +45,6 @@
         <ListView x:Name="contractInfoListView"
                   VerticalOptions="FillAndExpand"
                   HorizontalOptions="FillAndExpand"
-                  IsPullToRefreshEnabled="True"
                   HasUnevenRows="True"
                   ItemsSource="{Binding ContractText}"
                   Margin="10, 10, 10, 0"

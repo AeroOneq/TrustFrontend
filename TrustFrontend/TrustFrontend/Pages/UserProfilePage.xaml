@@ -7,7 +7,7 @@
         <Style x:Key="userPhotoFrameStyle" TargetType="Frame">
             <Setter Property="HeightRequest" Value="120"/>
             <Setter Property="WidthRequest" Value="120"/>
-            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderColor" Value="{StaticResource mainThemeColor}"/>
             <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
             <Setter Property="VerticalOptions" Value="Center"/>

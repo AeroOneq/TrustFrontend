@@ -53,5 +53,30 @@ namespace TrustFrontend
             ContractInfo tappedContract = Contracts.Find(c => c.Id == contractModel.ID);
             await Navigation.PushModalAsync(new ContractViewPage(tappedContract, CurrentUser));
         }
+
+        private async void SearchForContracts(object sender, TextChangedEventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                string searchText = searchEntry.Text;
+
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    Device.BeginInvokeOnMainThread(() => approvedContractsListView.ItemsSource =
+                        ContractsData);
+                    return;
+                }
+
+                ObservableCollection<ContractModel> contractModels = new ObservableCollection<ContractModel>();
+                for (int i = 0; i < ContractsData.Count; i++)
+                {
+                    if (ContractsData[i].ContractName.IndexOf(searchText) > -1)
+                        contractModels.Add(ContractsData[i]);
+                }
+
+                Device.BeginInvokeOnMainThread(() => approvedContractsListView.ItemsSource =
+                    contractModels);
+            });
+        }
     }
 }

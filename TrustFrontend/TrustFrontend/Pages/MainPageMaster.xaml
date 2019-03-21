@@ -24,7 +24,7 @@
         <Style x:Key="userPhotoFrameStyle"  TargetType="Frame">
             <Setter Property="HeightRequest" Value="70"/>
             <Setter Property="WidthRequest" Value="70"/>
-            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderColor" Value="{StaticResource mainThemeBackgroundColor}"/>
             <Setter Property="BackgroundColor" Value="{StaticResource mainThemeColor}"/>
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -60,7 +60,8 @@
                                  HeightRequest="100"
                                  Orientation="Horizontal"
                                  BackgroundColor="{StaticResource mainThemeColor}">
-                        <Frame Style="{StaticResource userPhotoFrameStyle}"/>
+                        <Frame x:Name="userPhotoFrame"
+                               Style="{StaticResource userPhotoFrameStyle}"/>
                         <Label Style="{StaticResource appNameLabelStyle}"
                                Text="Trust.Options"/>
                     </StackLayout>

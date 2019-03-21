@@ -59,5 +59,30 @@ namespace TrustFrontend
 
         private async void GoToCreateNewContractPage(object sender, EventArgs e) =>
             await Navigation.PushAsync(new CreateNewContractPage(CurrentUser));
+
+        private async void SearchForContracts(object sender, TextChangedEventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                string searchText = searchEntry.Text;
+
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    Device.BeginInvokeOnMainThread(() => sharedContractsListView.ItemsSource =
+                        ContractsData);
+                    return;
+                }
+
+                ObservableCollection<ContractModel> contractModels = new ObservableCollection<ContractModel>();
+                for (int i = 0; i < ContractsData.Count; i++)
+                {
+                    if (ContractsData[i].ContractName.IndexOf(searchText) > -1)
+                        contractModels.Add(ContractsData[i]);
+                }
+
+                Device.BeginInvokeOnMainThread(() => sharedContractsListView.ItemsSource =
+                    contractModels);
+            });
+        }
     }
 }

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -68,33 +66,46 @@ namespace TrustFrontend
 
         private void DeleteUser(object sender, EventArgs e)
         {
-            string userName = (sender as Button).ClassId;
+            try
+            {
+                string userName = (sender as Button).ClassId;
 
-            CreateNewContractUserData userData =
-                PageModel.UsersData.Single(u => u.UserNameEditorText == userName);
-            PageModel.UsersData.Remove(userData);
+                CreateNewContractUserData userData =
+                    PageModel.UsersData.Single(u => u.UserNameEditorText == userName);
+                PageModel.UsersData.Remove(userData);
 
-            ContractTextModel contractTextModel = PageModel.ContractText.Single(
-                cm => cm.UserName == userName);
-            PageModel.ContractText.Remove(contractTextModel);
+                ContractTextModel contractTextModel = PageModel.ContractText.Single(
+                    cm => cm.UserName == userName);
+                PageModel.ContractText.Remove(contractTextModel);
 
-            usersDataListView.HeightRequest -= 65;
-            BindingContext = PageModel;
+                usersDataListView.HeightRequest -= 65;
+                BindingContext = PageModel;
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Ошибка", ex.Message, "OK");
+            }
         }
 
         private async void CreateNewContract(object sender, EventArgs e)
         {
             try
             {
+                ActivityIndicatorActions.SetActivityIndicatorOn(activitIndicator);
                 string[] userLogins = GetUserLogins();
                 ContractInfo contractInfo = CreateContractObject(
                     await UserService.GetUserIDs(userLogins));
 
                 await ContractService.CreateNewRecord(contractInfo);
+                await DisplayAlert("Статус", "Контракт создан", "OK");
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Ошибка при создании контракта", ex.Message, "OK");
+            }
+            finally
+            {
+                ActivityIndicatorActions.SetActivityIndicatorOff(activitIndicator);
             }
         }
         private string[] GetUserLogins()

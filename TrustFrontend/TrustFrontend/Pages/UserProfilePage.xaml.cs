@@ -17,7 +17,7 @@ namespace TrustFrontend
 
 		public UserProfilePage(UserInfo user)
 		{
-			InitializeComponent ();
+			InitializeComponent();
 
             User = user;
             BindingContext = new UserProfilePageModel(User);
