@@ -24,7 +24,7 @@
             <Setter Property="FontFamily" Value="Arial, Verdana"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="TextColor" Value="{StaticResource mainTextColor}"/>
-            <Setter Property="BackgroundColor" Value="Red"/>
+            <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="MaxLength" Value="6"/>
         </Style>
@@ -55,7 +55,7 @@
             <Label Style="{StaticResource headerLabelStyle}"
                    Text="Введите код, высланный на указанную почту"/>
             <local:BorderlessEntry x:Name="emailCodeEntry"
-                Style="{StaticResource entryStyle}"/>
+                                   Style="{StaticResource entryStyle}"/>
             <StackLayout Style="{StaticResource lineLayoutStyle}"/>
             <Button Style="{StaticResource continueBtnStyle}"
                     Text="Создать аккаунт"

@@ -25,7 +25,7 @@ namespace ServerLib
                 IsBodyHtml = true
             };
 
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com")
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587)
             {
                 Credentials = new NetworkCredential("aeroone90@gmail.com", "AeroOne1"),
                 EnableSsl = true

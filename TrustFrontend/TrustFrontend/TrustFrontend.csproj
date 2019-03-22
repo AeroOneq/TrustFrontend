@@ -36,8 +36,6 @@
     <None Remove="Resources\sharedContractsIcon.png" />
     <None Remove="Resources\takeFaceIDIcon.png" />
     <None Remove="Resources\userIcon.png" />
-    <None Remove="russian_names.csv" />
-    <None Remove="russian_surnames.csv" />
     <None Remove="sharedContractsIcon.png" />
   </ItemGroup>
 
@@ -58,8 +56,6 @@
     <EmbeddedResource Include="Resources\sharedContractsIcon.png" />
     <EmbeddedResource Include="Resources\takeFaceIDIcon.png" />
     <EmbeddedResource Include="Resources\userIcon.png" />
-    <EmbeddedResource Include="russian_names.csv" />
-    <EmbeddedResource Include="russian_surnames.csv" />
   </ItemGroup>
 
   <ItemGroup>

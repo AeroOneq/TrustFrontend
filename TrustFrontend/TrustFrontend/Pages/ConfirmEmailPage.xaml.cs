@@ -27,11 +27,16 @@ namespace TrustFrontend
             {
                 try
                 {
+                    (sender as Button).IsEnabled = false;
                     await UserService.CreateNewRecord(NewUser);
                 }
                 catch (Exception ex)
                 {
                     await DisplayAlert("Ошибка при создании аккаунта", ex.Message, "OK");
+                }
+                finally
+                {
+                    (sender as Button).IsEnabled = true;
                 }
             }
             else

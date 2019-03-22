@@ -46,10 +46,11 @@ namespace TrustFrontend
         {
             try
             {
+                ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
                 if (Array.FindIndex(EditQuery.ApprovedP, id => id == User.Id) > -1 ||
                     Array.FindIndex(EditQuery.DisapprovedP, id => id == User.Id) > -1)
                 {
-                    await DisplayAlert("Query status", "You have already voted for this query", "OK");
+                    await DisplayAlert("Статус", "Вы уже высказали свое мнение", "OK");
                 }
                 else
                 {
@@ -63,23 +64,54 @@ namespace TrustFrontend
                     if (EditQuery.ApprovedP.Length == Contract.ParticipantsId.Length)
                         EditQuery.Closed = true;
 
-                    //ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
                     await EditQueryService.UpdateQueryStatus(EditQuery, Contract);
-                    //ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
 
-                    await DisplayAlert("Query status", "The query has been updated, you have approved " +
-                        "this query", "OK");
+                    await DisplayAlert("Статус", "Вы одобрили изменение", "OK");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                await DisplayAlert("Статус", ex.Message, "OK", "OK");
+                await DisplayAlert("Статус", "Произошла внутренняя ошибка", "OK");
+            }
+            finally
+            {
+                ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
             }
         }
 
-        private void DisapproveQuery(object sender, EventArgs e)
+        private async void DisapproveQuery(object sender, EventArgs e)
         {
+            try
+            {
+                ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
+                if (Array.FindIndex(EditQuery.ApprovedP, id => id == User.Id) > -1 ||
+                    Array.FindIndex(EditQuery.DisapprovedP, id => id == User.Id) > -1)
+                {
+                    await DisplayAlert("Статус", "Вы уже высказали свое мнение", "OK");
+                }
+                else
+                {
+                    int[] newDispprovedP = new int[EditQuery.DisapprovedP.Length + 1];
+                    for (int i = 0; i < newDispprovedP.Length - 1; i++)
+                        newDispprovedP[i] = EditQuery.DisapprovedP[i];
+                    newDispprovedP[newDispprovedP.Length - 1] = User.Id;
 
+                    EditQuery.DisapprovedP = newDispprovedP;
+                    EditQuery.Closed = true;
+
+                    await EditQueryService.UpdateQueryStatus(EditQuery, Contract);
+
+                    await DisplayAlert("Статус", "Вы наложили вето на изменение", "OK");
+                }
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Статус", "Произошла внутренняя ошибка", "OK");
+            }
+            finally
+            {
+                ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
+            }
         }
     }
 }

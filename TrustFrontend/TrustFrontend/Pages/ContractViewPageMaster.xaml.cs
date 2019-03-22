@@ -15,7 +15,7 @@ namespace TrustFrontend
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContractViewPageMaster : ContentPage
     {
-        public ListView ListView;
+        public ListView ListView { get; set; }
 
         public ContractViewPageMaster()
         {

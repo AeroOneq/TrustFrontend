@@ -36,6 +36,7 @@ namespace TrustFrontend
         {
             try
             {
+                (sender as Button).IsEnabled = false;
                 UserInfo newUser = await CreateNewUserObject();
 
                 await UserService.UpdateRecordAsync(User, newUser);
@@ -47,6 +48,10 @@ namespace TrustFrontend
             catch (Exception ex)
             {
                 await DisplayAlert("Ошибка", ex.Message, "OK");
+            }
+            finally
+            {
+                (sender as Button).IsEnabled = true;
             }
         }
 

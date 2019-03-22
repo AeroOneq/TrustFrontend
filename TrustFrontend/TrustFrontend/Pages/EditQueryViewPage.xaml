@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrustFrontend.EditQueryViewPage"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="True"
+             Title="Предложение">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="Resources/approveIcon.png"
                      Clicked="ApproveQuery"/>
-        <ToolbarItem Icon="Resources/disapproveIcon.png"/>
+        <ToolbarItem Icon="Resources/disapproveIcon.png"
+                     Clicked="DisapproveQuery"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style x:Key="headerLabelStyle" TargetType="Label">
@@ -54,6 +56,8 @@
         <StackLayout VerticalOptions="FillAndExpand"
                      HorizontalOptions="FillAndExpand"
                      BackgroundColor="{StaticResource mainThemeBackgroundColor}">
+            <ActivityIndicator x:Name="activityIndicator"
+                               Style="{StaticResource activityIndicatorStyle}"/>
             <ListView x:Name="editQueryDataListView"
                       VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand"
@@ -71,7 +75,7 @@
                                   Orientation="Horizontal"
                                   BackgroundColor="{StaticResource mainThemeColor}">
                         <Label Style="{StaticResource headerLabelStyle}"
-                               Text="НОВЫЙ ТЕКСТ КОНТРАКТА"/>
+                               Text="Новый текст контракта"/>
                     </StackLayout>
                 </ListView.Header>
                 <ListView.ItemTemplate>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Plugin.Media.Abstractions;
 using ServerLib;
@@ -27,17 +24,24 @@ namespace TrustFrontend
             TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += async (sender, e) =>
             {
-                MediaFile faceID = await Photo.TakeFaceIDAsync();
-                if (faceID != null)
+                try
                 {
-                    NewUser.FaceID = Photo.GetByteRepresentationOfFaceID(faceID);
-
-                    Frame faceIDFrame = sender as Frame;
-                    faceIDFrame.Content = new Image()
+                    MediaFile faceID = await Photo.TakeFaceIDAsync();
+                    if (faceID != null)
                     {
-                        Source = ImageSource.FromStream(() => new MemoryStream(NewUser.FaceID)),
-                        Aspect = Aspect.AspectFill
-                    };
+                        NewUser.FaceID = Photo.GetByteRepresentationOfFaceID(faceID);
+
+                        Frame faceIDFrame = sender as Frame;
+                        faceIDFrame.Content = new Image()
+                        {
+                            Source = ImageSource.FromStream(() => new MemoryStream(NewUser.FaceID)),
+                            Aspect = Aspect.AspectFill
+                        };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Ошибка", ex.Message, "OK");
                 }
             };
 
@@ -46,13 +50,25 @@ namespace TrustFrontend
 
         private async void SendCodeAndGoToNextStage(object sender, EventArgs e)
         {
-            ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
-            if (await CheckInputData())
+            try
             {
-                await Task.Run(() => Email.SendEmailWIthCode(NewUser));
-                await Navigation.PushAsync(new ConfirmEmailPage(NewUser));
+                (sender as Button).IsEnabled = false;
+                ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
+                if (await CheckInputData())
+                {
+                    await Task.Run(() => Email.SendEmailWIthCode(NewUser));
+                    await Navigation.PushAsync(new ConfirmEmailPage(NewUser));
+                }
+                ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
             }
-            ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", ex.Message, "OK");
+            }
+            finally
+            {
+                (sender as Button).IsEnabled = true;
+            }
         }
 
         #region Data check

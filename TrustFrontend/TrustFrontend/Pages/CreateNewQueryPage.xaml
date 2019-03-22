@@ -69,6 +69,10 @@
         <StackLayout VerticalOptions="FillAndExpand"
                      HorizontalOptions="FillAndExpand"
                      BackgroundColor="{StaticResource mainThemeColor}">
+            <ActivityIndicator x:Name="activityIndicator"
+                               BackgroundColor="{StaticResource mainThemeColor}"
+                               Color="White"
+                               Style="{StaticResource activityIndicatorStyle}"/>
             <ListView x:Name="newQueryDataListView"
                       VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand"

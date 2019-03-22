@@ -15,7 +15,6 @@ namespace TrustFrontend
             new CreateNewContractPageModel();
         private UserInfo User { get; set; }
 
-
         public CreateNewContractPage(UserInfo user)
         {
             InitializeComponent();
@@ -42,6 +41,14 @@ namespace TrustFrontend
             PageModel.UsersData.RemoveAt(PageModel.UsersData.Count - 1);
 
             string userName = userData[userData.Count - 1].UserNameEditorText;
+            if (string.IsNullOrEmpty(userName) || PageModel.UsersData.ToList().FindIndex(
+                u => u.UserNameEditorText == userName) != -1)
+            {
+                DisplayAlert("Ошибка", "Невозможно создать пользователя с такими параметрами",
+                    "OK");
+                return;
+            }
+
             PageModel.UsersData.Add(new CreateNewContractUserData()
             {
                 UserNameEditorText = userName,

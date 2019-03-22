@@ -2,15 +2,16 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrustFrontend.ContractViewPage"
-             xmlns:pages="clr-namespace:TrustFrontend">
-  <MasterDetailPage.Master>
-    <pages:ContractViewPageMaster x:Name="MasterPage" />
-  </MasterDetailPage.Master>
-  <MasterDetailPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
-        <pages:ContractViewPageDetail />
-      </x:Arguments>
-    </NavigationPage>
-  </MasterDetailPage.Detail>
+             xmlns:pages="clr-namespace:TrustFrontend"
+                  NavigationPage.HasNavigationBar="True">
+    <MasterDetailPage.Master>
+        <pages:ContractViewPageMaster x:Name="MasterPage" />
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <pages:ContractViewPageDetail x:Name="DetailPage" />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
 </MasterDetailPage>

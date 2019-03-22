@@ -12,7 +12,6 @@ namespace TrustFrontend
 {
     public partial class AuthorizationPage : ContentPage
     {
-        //face id which can be taken on the second page
         private byte[] FaceID { get; set; }
         private bool AuthMode { get; set; }
 
@@ -42,17 +41,38 @@ namespace TrustFrontend
         }
         private async void SignIn(object sender, EventArgs e)
         {
-            ActivityIndicatorActions.SetActivityIndicatorOn(authActivityIndicator);
-            AuthResult authResult = await CheckLoginAndPass();
-            if (authResult.User == null)
-                await DisplayAlert("Ошибка при авторизации", authResult.MistakeMsg, "OK");
-            else
+            try
             {
-                App.Current.Properties.Clear();
-                App.Current.Properties.Add("currentUserId", authResult.User.Id);
-                await Navigation.PushAsync(new MainPage(authResult.User));
+                (sender as Button).IsEnabled = false;
+                if (!AuthMode)
+                    await AuthorizeUserWithLoginAndPass();
+                else
+                    await AuthorizeUserWithFaceID();
             }
-            ActivityIndicatorActions.SetActivityIndicatorOff(authActivityIndicator);
+            finally
+            {
+                (sender as Button).IsEnabled = true;
+            }
+        }
+
+        private async Task AuthorizeUserWithLoginAndPass()
+        {
+            try
+            {
+                ActivityIndicatorActions.SetActivityIndicatorOn(authActivityIndicator);
+                AuthResult authResult = await CheckLoginAndPass();
+                if (authResult.User == null)
+                    await DisplayAlert("Ошибка при авторизации", authResult.MistakeMsg, "OK");
+                else
+                {
+                    await Navigation.PushAsync(new MainPage(authResult.User));
+                }
+                ActivityIndicatorActions.SetActivityIndicatorOff(authActivityIndicator);
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Ошибка", "Ошибка авторизации", "OK");
+            }
         }
         /// <summary>
         /// Method for a Task in AuthorizeUser, checks the correctness of input data
@@ -77,35 +97,52 @@ namespace TrustFrontend
         /// </summary>
         private async void TakeFaceID(object sender, EventArgs e)
         {
-            if (await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Photos)
-                == PermissionStatus.Granted)
+            try
             {
-                var image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions());
-                if (image != null)
+                if (await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Photos)
+                    == PermissionStatus.Granted)
                 {
-                    FileStream fileStream = new FileStream(image.Path, FileMode.Open);
-                    FaceID = new byte[fileStream.Length];
-                    fileStream.Read(FaceID, 0, (int)fileStream.Length);
+                    var image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions());
+                    if (image != null)
+                    {
+                        FileStream fileStream = new FileStream(image.Path, FileMode.Open);
+                        FaceID = new byte[fileStream.Length];
+                        fileStream.Read(FaceID, 0, (int)fileStream.Length);
+                    }
                 }
             }
+            catch (NullReferenceException)
+            {
+                await DisplayAlert("Ошибка", "Ошибка при фотографировании", "OK");
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Ошибка", "Ошибка при фотографировании", "OK");
+            }
+
         }
         /// <summary>
         /// Authorizes user with login and Face ID
         /// </summary>
-        private async void AuthorizeUserWithFaceID(object sender, EventArgs e)
+        private async Task AuthorizeUserWithFaceID()
         {
-            ActivityIndicatorActions.SetActivityIndicatorOn(authActivityIndicator);
-            AuthResult authResult = await CheckdLoginAndFaceID();
-            if (authResult.User == null)
-                await DisplayAlert("Ошибка при авторизации", authResult.MistakeMsg, "OK");
-            else
+            try
             {
-                FaceID = null;
-                App.Current.Properties.Clear();
-                App.Current.Properties.Add("currentUser", authResult.User.Id);
-                await Navigation.PushAsync(new MainPage(authResult.User));
+                ActivityIndicatorActions.SetActivityIndicatorOn(authActivityIndicator);
+                AuthResult authResult = await CheckdLoginAndFaceID();
+                if (authResult.User == null)
+                    await DisplayAlert("Ошибка при авторизации", authResult.MistakeMsg, "OK");
+                else
+                {
+                    FaceID = null;
+                    await Navigation.PushAsync(new MainPage(authResult.User));
+                }
+                ActivityIndicatorActions.SetActivityIndicatorOff(authActivityIndicator);
             }
-            ActivityIndicatorActions.SetActivityIndicatorOff(authActivityIndicator);
+            catch (Exception)
+            {
+                await DisplayAlert("Ошибка", "Ошибка при авторизации", "OK");
+            }
         }
         /// <summary>
         /// Method for a Task in AuthorizeUserWithFaceID, checks the correctness of input data

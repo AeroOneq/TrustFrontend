@@ -54,19 +54,6 @@
             <Setter Property="Margin" Value="30, 10, 30, 20"/>
             <Setter Property="Padding" Value="0"/>
         </Style>
-        <Style x:Key="activityIndicator" TargetType="ActivityIndicator">
-            <Setter Property="VerticalOptions" Value="Start"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="WidthRequest" Value="20"/>
-            <Setter Property="HeightRequest" Value="20"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
-            <Setter Property="Color" Value="{StaticResource mainThemeColor}"/>
-            <Setter Property="IsRunning" Value="True"/>
-            <Setter Property="IsVisible" Value="True"/>
-            <Setter Property="IsEnabled" Value="True"/>
-            <Setter Property="Margin" Value="10, 0, 0, 5"/>
-            <Setter Property="IsVisible" Value="False"/>
-        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView VerticalOptions="FillAndExpand"
@@ -75,7 +62,7 @@
                      HorizontalOptions="FillAndExpand"
                      BackgroundColor="{StaticResource mainThemeBackgroundColor}">
                 <ActivityIndicator x:Name="activityIndicator"
-                                   Style="{StaticResource activityIndicator}"/>
+                                   Style="{StaticResource activityIndicatorStyle}"/>
                 <StackLayout VerticalOptions="Start"
                          HeightRequest="160"
                          HorizontalOptions="FillAndExpand"
@@ -130,6 +117,7 @@
                            Text="Пароль"/>
                     <local:BorderlessEntry x:Name="passwordEntry"
                                            Text="qwerty123321"
+                                           IsPassword="True"
                                            Style="{StaticResource registrationEntryStyle}"/>
                     <StackLayout Style="{StaticResource lineLayoutStyle}"/>
 
@@ -148,7 +136,7 @@
                     <StackLayout Style="{StaticResource lineLayoutStyle}"/>
                 </StackLayout>
                 <Button Style="{StaticResource continueBtnStyle}"
-                        Text="Принять и продолжить"
+                        Text="Продолжить"
                         Clicked="SendCodeAndGoToNextStage"/>
             </StackLayout>
         </ScrollView>

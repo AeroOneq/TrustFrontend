@@ -104,25 +104,13 @@
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Start"/>
         </Style>
-        <Style x:Key="activityIndicator" TargetType="ActivityIndicator">
-            <Setter Property="VerticalOptions" Value="Start"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="WidthRequest" Value="25"/>
-            <Setter Property="HeightRequest" Value="25"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
-            <Setter Property="Color" Value="{StaticResource mainThemeColor}"/>
-            <Setter Property="IsRunning" Value="True"/>
-            <Setter Property="IsEnabled" Value="True"/>
-            <Setter Property="Margin" Value="5, 0, 0, 5"/>
-            <Setter Property="IsVisible" Value="False"/>
-        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout VerticalOptions="Start"
                      HorizontalOptions="FillAndExpand"
                      BackgroundColor="{StaticResource mainThemeBackgroundColor}">
             <ActivityIndicator x:Name="activitIndicator"
-                               Style="{StaticResource activityIndicator}"/>
+                               Style="{StaticResource activityIndicatorStyle}"/>
             <ListView VerticalOptions="Start"
                       HorizontalOptions="FillAndExpand"
                       BackgroundColor="{StaticResource mainThemeBackgroundColor}"

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ServerLib;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -43,8 +39,9 @@ namespace TrustFrontend
         {
             try
             {
-                EditQuery newQuery = CreateQueryObject();
+                ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
 
+                EditQuery newQuery = CreateQueryObject();
                 await EditQueryService.CreateNewRecordAsync(newQuery);
 
                 await DisplayAlert("Статус создания", "Предложение успешно создано", "OK");
@@ -52,6 +49,10 @@ namespace TrustFrontend
             catch (Exception ex)
             {
                 await DisplayAlert("Ошибка", ex.Message, "OK");
+            }
+            finally
+            {
+                ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
             }
         }
 

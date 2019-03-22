@@ -15,5 +15,18 @@
         <Color x:Key="regScrollTheme">#5C019D</Color>
         <Color x:Key="regTextColor">White</Color>
         <Color x:Key="regErrorTextColor">#FF8C00</Color>
+
+        <Style x:Key="activityIndicatorStyle" TargetType="ActivityIndicator">
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="25"/>
+            <Setter Property="HeightRequest" Value="25"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource mainThemeBackgroundColor}"/>
+            <Setter Property="Color" Value="{StaticResource mainThemeColor}"/>
+            <Setter Property="IsRunning" Value="True"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="Margin" Value="5, 0, 0, 5"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
     </Application.Resources>
 </Application>

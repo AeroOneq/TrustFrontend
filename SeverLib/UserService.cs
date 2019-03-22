@@ -12,6 +12,7 @@ namespace ServerLib
 
         public static async Task<UserInfo> AuthorizeUserAsync(string login, string password) =>
             await Task.Run(() => UserDB.AuthorizeUser(login, password));
+
         public static async Task<UserInfo> AuthorizeUserAsync(string login, byte[] faceID) =>
             await Task.Run(() => UserDB.AuthorizeUserWithFaceID(login, faceID));
 

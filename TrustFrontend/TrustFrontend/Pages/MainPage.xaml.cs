@@ -23,7 +23,7 @@ namespace TrustFrontend
             MasterPage.ListView.ItemTapped += ListViewItemTapped;
             MasterPage.User = user;
 
-            Detail = new SharedContractsPage(user);
+            Detail = new NavigationPage(new SharedContractsPage(user));
         }
 
         private void ListViewItemTapped(object sender, ItemTappedEventArgs e)

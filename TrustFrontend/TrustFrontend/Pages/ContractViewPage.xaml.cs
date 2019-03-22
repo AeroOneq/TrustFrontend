@@ -22,6 +22,9 @@ namespace TrustFrontend
             CurrentUser = user;
             ContractDataModel contractDataModel = CreateContractDataModel(CurrentContract);
             BindingContext = contractDataModel;
+
+            DetailPage.CurrentContract = contract;
+            DetailPage.CurrentUser = user;
             MasterPage.ListView.ItemTapped += ListViewItemTapped;
         }
 

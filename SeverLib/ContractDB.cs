@@ -55,10 +55,10 @@ namespace ServerLib
             }
         }
 
-        public static void CreateCosmosDBForChat(ContractInfo contract)
+        public static async void CreateCosmosDBForChat(ContractInfo contract)
         {
             CosmosDB cosmosDB = new CosmosDB();
-            cosmosDB.Connect();
+            await cosmosDB.Connect();
             cosmosDB.CreateNewCollectionAsync(contract);
         }
         /// <summary>
@@ -227,7 +227,7 @@ namespace ServerLib
             SqlCommand updateContractRecordCommand = new SqlCommand
             {
                 Connection = connection,
-                CommandText = @"UPDATE contracts SET cText = @contractText WHERE
+                CommandText = @"UPDATE contracts SET contractText = @contractText WHERE
                     id like @contractId"
             };
 

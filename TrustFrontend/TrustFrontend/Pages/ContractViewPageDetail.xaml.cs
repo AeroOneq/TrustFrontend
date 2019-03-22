@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ServerLib;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,12 +12,13 @@ namespace TrustFrontend
     {
         public ListView ContractListView { get; set; }
 
-        private ContractInfo CurrentContract { get; set; } 
-        private UserInfo CurrentUser { get; set; } 
+        public ContractInfo CurrentContract { get; set; } 
+        public UserInfo CurrentUser { get; set; } 
 
         public ContractViewPageDetail()
         {
             InitializeComponent();
+            ContractListView = contractInfoListView;
         }
 
         public ContractViewPageDetail(ContractInfo contract, UserInfo user)

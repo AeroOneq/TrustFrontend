@@ -28,6 +28,8 @@ namespace TrustFrontend
 
             CurrentContract = contract;
             CurrentUser = user;
+
+            UpdateEditQueries(editQueriesListView, null);
         }
 
         private async void GoToEditQueryViewPage(object sender, ItemTappedEventArgs e)
@@ -44,11 +46,20 @@ namespace TrustFrontend
 
         private async void UpdateEditQueries(object sender, EventArgs e)
         {
-            editQueriesListView.IsRefreshing = true;
+            try
+            {
+                editQueriesListView.IsRefreshing = true;
 
-            await CreateBindingContext();
-
-            editQueriesListView.IsRefreshing = false;
+                await CreateBindingContext();
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Ошибка", "Ошикба при загрузке предложений по изменению", "OK");
+            }
+            finally
+            {
+                editQueriesListView.IsRefreshing = false;
+            }
         }
 
         private async Task CreateBindingContext()

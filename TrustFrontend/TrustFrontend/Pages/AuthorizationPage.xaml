@@ -188,6 +188,7 @@
                                                    Margin="10, 20, 35, 0"
                                                    Placeholder="Введите логин"/>
                             <Button x:Name="takeFaceIDBtn"
+                                    Clicked="TakeFaceID"
                                     Image="Resources/takeFaceIDIcon.png"
                                     Style="{StaticResource takeFaceIDBtnStyle}"/>
                         </StackLayout>
