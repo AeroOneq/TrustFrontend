@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Plugin.Media.Abstractions;
 using ServerLib;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,6 +26,38 @@ namespace TrustFrontend
             User = user;
             NewFaceID = User.FaceID;
             BindingContext = CreateEditPageModel();
+
+            AddGestureRecognizers();
+        }
+
+        private void AddGestureRecognizers()
+        {
+            TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
+
+            tapGestureRecognizer.Tapped += async (sender, e) =>
+            {
+                try
+                {
+                    MediaFile faceID = await Photo.TakeFaceIDAsync();
+                    if (faceID != null)
+                    {
+                        NewFaceID = Photo.GetByteRepresentationOfFaceID(faceID);
+
+                        Frame faceIDFrame = sender as Frame;
+                        faceIDFrame.Content = new Image()
+                        {
+                            Source = ImageSource.FromStream(() => new MemoryStream(NewFaceID)),
+                            Aspect = Aspect.AspectFill
+                        };
+                    }
+                }
+                catch (Exception)
+                {
+                    await DisplayAlert("Ошибка", "Ошибка при съемке Face ID", "OK");
+                }
+            };
+
+            faceIDFrame.GestureRecognizers.Add(tapGestureRecognizer);
         }
 
         private EditProfilePageModel CreateEditPageModel()
@@ -45,9 +79,9 @@ namespace TrustFrontend
             {
                 await DisplayAlert("Ошибка в данных", ex.Message, "OK");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                await DisplayAlert("Ошибка", ex.Message, "OK");
+                await DisplayAlert("Ошибка", "Произошла внутренняя ошибка", "OK");
             }
             finally
             {

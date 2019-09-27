@@ -85,17 +85,14 @@
                             <local:BorderlessEntry x:Name="nameEntry"
                                                    Style="{StaticResource registrationEntryStyle}"
                                                    Placeholder="Введите имя"
-                                                   Text="Evgeniy"
                                                    Margin="10, 0, 10, 0"/>
                             <StackLayout Style="{StaticResource lineLayoutStyle}"/>
                             <local:BorderlessEntry x:Name="surnameEntry"
                                                    Style="{StaticResource registrationEntryStyle}"
                                                    Placeholder="Введите фамилию"
-                                                   Text="Stepanov"
                                                    Margin="10, 10, 10, 0"/>
                             <StackLayout Style="{StaticResource lineLayoutStyle}"/>
                             <local:BorderlessEntry x:Name="fNameEntry"
-                                                   Text="Vadimovich"
                                                    Style="{StaticResource registrationEntryStyle}"
                                                    Placeholder="Введите отчество"
                                                    Margin="10, 10, 10, 0"/>
@@ -109,14 +106,12 @@
                     <Label Style="{StaticResource propertyHeadLbl}"
                            Text="Логин"/>
                     <local:BorderlessEntry x:Name="loginEntry"
-                                           Text="Aero123"
                                            Style="{StaticResource registrationEntryStyle}"/>
                     <StackLayout Style="{StaticResource lineLayoutStyle}"/>
 
                     <Label Style="{StaticResource propertyHeadLbl}"
                            Text="Пароль"/>
                     <local:BorderlessEntry x:Name="passwordEntry"
-                                           Text="qwerty123321"
                                            IsPassword="True"
                                            Style="{StaticResource registrationEntryStyle}"/>
                     <StackLayout Style="{StaticResource lineLayoutStyle}"/>
@@ -124,14 +119,13 @@
                     <Label Style="{StaticResource propertyHeadLbl}"
                            Text="E-mail"/>
                     <local:BorderlessEntry x:Name="emailEntry"
-                                           Text="aerooneQ@yandex.ru"
+                                           Keyboard="Email"
                                            Style="{StaticResource registrationEntryStyle}"/>
                     <StackLayout Style="{StaticResource lineLayoutStyle}"/>
 
                     <Label Style="{StaticResource propertyHeadLbl}"
                            Text="Кодовое слово"/>
                     <local:BorderlessEntry x:Name="codewordEntry"
-                                           Text="dogcatjungle"
                                            Style="{StaticResource registrationEntryStyle}"/>
                     <StackLayout Style="{StaticResource lineLayoutStyle}"/>
                 </StackLayout>

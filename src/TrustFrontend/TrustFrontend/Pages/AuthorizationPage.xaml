@@ -183,7 +183,6 @@
                                      HorizontalOptions="FillAndExpand"
                                      Orientation="Horizontal">
                             <local:BorderlessEntry x:Name="loginEntry"
-                                                   Text="Aero12"
                                                    Style="{StaticResource authBorderlessEntryStyle}"
                                                    Margin="10, 20, 35, 0"
                                                    Placeholder="Введите логин"/>
@@ -194,7 +193,6 @@
                         </StackLayout>
                         <StackLayout Style="{StaticResource devisionStackLayoutStyle}"/>
                         <local:BorderlessEntry x:Name="passwordEntry"
-                                               Text="qwerty1"
                                                Style="{StaticResource authBorderlessEntryStyle}"
                                                IsPassword="True"
                                                Margin="10, 20, 0, 0"

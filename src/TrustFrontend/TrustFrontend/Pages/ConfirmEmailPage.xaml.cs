@@ -27,6 +27,7 @@ namespace TrustFrontend
             {
                 try
                 {
+                    ActivityIndicatorActions.SetActivityIndicatorOn(activityIndicator);
                     (sender as Button).IsEnabled = false;
                     await UserService.CreateNewRecord(NewUser);
                 }
@@ -36,6 +37,7 @@ namespace TrustFrontend
                 }
                 finally
                 {
+                    ActivityIndicatorActions.SetActivityIndicatorOff(activityIndicator);
                     (sender as Button).IsEnabled = true;
                 }
             }

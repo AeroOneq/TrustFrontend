@@ -14,6 +14,7 @@
             <Setter Property="FontFamily" Value="Arial, Verdana"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="TextColor" Value="Gray"/>
+            
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -124,7 +125,7 @@
                               HorizontalOptions="FillAndExpand"
                               SeparatorVisibility="None"
                               HasUnevenRows="True"
-                              HeightRequest="190"
+                              HeightRequest="240"
                               ItemsSource="{Binding UsersData}"
                               SelectionMode="None"
                               Margin="10, 0, 10, 0"
@@ -138,6 +139,7 @@
                                                        Placeholder="Имя контракта..."/>
                                 <StackLayout Style="{StaticResource lineLayoutStyle}"/>
                                 <Label Style="{StaticResource usersDataHeadLbl}"
+                                       BackgroundColor="Transparent"
                                        Text="Список пользователей: "/>
                             </StackLayout>
                         </ListView.Header>

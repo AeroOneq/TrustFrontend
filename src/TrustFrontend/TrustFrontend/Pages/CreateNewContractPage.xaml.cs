@@ -13,6 +13,7 @@ namespace TrustFrontend
     {
         public CreateNewContractPageModel PageModel { get; set; } =
             new CreateNewContractPageModel();
+
         private UserInfo User { get; set; }
 
         public CreateNewContractPage(UserInfo user)
@@ -28,6 +29,15 @@ namespace TrustFrontend
         {
             PageModel.UsersData.Add(new CreateNewContractUserData()
             {
+                UserNameEditorText = User.Login,
+                IsEnabled = false,
+                IsDeleteButtonVisible = false,
+            });
+            PageModel.ContractText.Add(new ContractTextModel(new UserPart(User.Login,
+                string.Empty, string.Empty)));
+
+            PageModel.UsersData.Add(new CreateNewContractUserData()
+            {
                 UserNameEditorText = string.Empty,
                 HeadLabelText = "Введите имя пользователя:",
                 IsEnabled = true,
@@ -37,18 +47,18 @@ namespace TrustFrontend
         private void AddNewUser(object sender, EventArgs e)
         {
             List<CreateNewContractUserData> userData = usersDataListView.ItemsSource.
-                Cast<CreateNewContractUserData>().ToList();
-            PageModel.UsersData.RemoveAt(PageModel.UsersData.Count - 1);
+                 Cast<CreateNewContractUserData>().ToList();
 
             string userName = userData[userData.Count - 1].UserNameEditorText;
             if (string.IsNullOrEmpty(userName) || PageModel.UsersData.ToList().FindIndex(
-                u => u.UserNameEditorText == userName) != -1)
+                u => u.UserNameEditorText == userName) < PageModel.UsersData.Count - 1)
             {
                 DisplayAlert("Ошибка", "Невозможно создать пользователя с такими параметрами",
                     "OK");
                 return;
             }
 
+            PageModel.UsersData.RemoveAt(PageModel.UsersData.Count - 1);
             PageModel.UsersData.Add(new CreateNewContractUserData()
             {
                 UserNameEditorText = userName,

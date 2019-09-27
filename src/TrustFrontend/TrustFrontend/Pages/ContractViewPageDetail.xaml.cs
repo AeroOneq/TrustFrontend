@@ -87,7 +87,7 @@ namespace TrustFrontend
 
                     await ContractService.UpdateRecord(CurrentContract);
 
-                    await DisplayAlert("Статус", "Вы одобрили этот контракт", "OK");
+                    await DisplayAlert("Статус", "Вы неодобрили этот контракт", "OK");
                 }
             }
             catch (Exception ex)
